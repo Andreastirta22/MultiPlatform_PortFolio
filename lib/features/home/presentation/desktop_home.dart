@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/design_system/molecules/project_card/sections/project_section.dart';
 import 'package:portfolio/design_system/organisms/hero/hero_layout.dart';
 
 class DesktopHome extends StatefulWidget {
@@ -64,21 +65,15 @@ class _DesktopHomeState extends State<DesktopHome>
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // --- Section: Hero ---
                 HeroLayout(),
 
-                // --- Section: About ---
-                //
-                _SectionPlaceholder(label: "About"),
+                ProjectSection(),
 
-                // --- Section: Projects Showcase ---
-                //
-                // Scroll-reveal animation lands here alongside this section.
-                _SectionPlaceholder(label: "Projects Showcase"),
+                _SectionPlaceholder(label: "Architecture"),
 
-                // --- Section: Contact ---
-                //
-                _SectionPlaceholder(label: "Contact"),
+                _SectionPlaceholder(label: "Experience"),
+
+                _SectionPlaceholder(label: "Footer"),
               ],
             ),
           ),

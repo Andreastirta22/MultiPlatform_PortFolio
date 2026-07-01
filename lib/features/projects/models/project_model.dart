@@ -1,17 +1,25 @@
 class ProjectModel {
   final String title;
-  final String desciption;
-  final List<String> tags;
+  final String subtitle;
+  final String description;
+  final String image;
+  final List<String> techs;
+  final String category;
   final String github;
-  final String website;
+  final String demo;
+  final String year;
   final bool featured;
 
-  ProjectModel({
+  const ProjectModel({
     required this.title,
-    required this.desciption,
-    required this.tags,
+    required this.subtitle,
+    required this.description,
+    required this.image,
+    required this.techs,
+    required this.category,
     required this.github,
-    required this.website,
+    required this.demo,
+    required this.year,
     required this.featured,
   });
 }
