@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:portfolio/core/extension/responsive_extension.dart';
 import 'package:portfolio/core/extension/theme_extension.dart';
 import 'package:portfolio/design_system/molecules/navbar/nav_items.dart';
 import 'package:portfolio/design_system/molecules/navbar/nav_logo.dart';
@@ -16,8 +13,7 @@ class FloatingNavbar extends StatelessWidget {
     final colors = context.colors;
     final radius = context.radius;
     final spacing = context.spacing;
-
-    final compact = context.width < 1100;
+    final compact = MediaQuery.sizeOf(context).width < 1100;
 
     return SafeArea(
       child: Padding(
@@ -28,51 +24,64 @@ class FloatingNavbar extends StatelessWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1280),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(radius.full),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                child: Container(
-                  height: 72,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: colors.transparent,
-                    borderRadius: BorderRadius.circular(radius.full),
-                    border: Border.all(color: colors.border),
+            child: Container(
+              height: 72,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: colors.transparent,
+                borderRadius: BorderRadius.circular(radius.full),
+                border: Border.all(color: colors.border),
+              ),
+              child: Row(
+                children: [
+                  const NavLogo(),
+                  Expanded(
+                    child: !compact
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: navItems.map((item) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: TextButton(
+                                  onPressed: item.onTap,
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: colors.textPrimary,
+                                    overlayColor: colors.textPrimary.withValues(
+                                      alpha: .06,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    item.label,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          )
+                        : const SizedBox(),
                   ),
-                  child: Row(
-                    children: [
-                      const NavLogo(),
-                      const Spacer(),
-                      if (!compact)
-                        ...navItems.map(
-                          (item) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: TextButton(
-                              onPressed: item.onTap,
-                              child: Text(item.label),
-                            ),
-                          ),
-                        ),
-                      const SizedBox(width: 12),
-                      const ThemeSwitcher(),
-                      if (context.isPhone)
-                        IconButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              backgroundColor: colors.transparent,
-                              isScrollControlled: true,
-                              builder: (_) {
-                                return const NavbarDrawer();
-                              },
-                            );
+                  ThemeSwitcher(compact: compact),
+                  if (compact)
+                    IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: colors.background,
+                          isScrollControlled: true,
+                          builder: (_) {
+                            return const NavbarDrawer();
                           },
-                          icon: const Icon(Icons.menu),
-                        ),
-                    ],
-                  ),
-                ),
+                        );
+                      },
+                      icon: const Icon(Icons.menu),
+                    ),
+                ],
               ),
             ),
           ),

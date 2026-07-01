@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 import '../app_theme_config.dart';
 import '../tokens/color_tokens.dart';
@@ -17,6 +18,21 @@ class XPTheme implements AppThemeConfig {
     textPrimary: Color(0xFF111111),
     textSecondary: Color(0xFF555555),
     transparent: Colors.transparent,
+  );
+
+  @override
+  VisualTokens get visuals => const VisualTokens(
+    glass: false,
+
+    outlined: true,
+
+    blur: 0,
+
+    elevation: 3,
+
+    navbarRadius: 4,
+
+    cardRadius: 4,
   );
 
   @override

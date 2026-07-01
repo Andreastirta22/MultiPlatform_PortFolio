@@ -24,12 +24,15 @@ class HeroStatItem extends StatelessWidget {
             style: TextStyle(
               fontSize: context.typography.title,
               fontWeight: FontWeight.bold,
+              color: context.colors.textPrimary,
             ),
           ),
-          SizedBox(height: context.spacing.xs),
           Text(
             stat.label,
-            style: TextStyle(fontSize: context.typography.caption),
+            style: TextStyle(
+              fontSize: context.typography.caption,
+              color: context.colors.textSecondary,
+            ),
           ),
         ],
       ),

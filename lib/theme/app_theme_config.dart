@@ -4,6 +4,7 @@ import 'package:portfolio/theme/tokens/motion_tokens.dart';
 import 'package:portfolio/theme/tokens/radius_tokens.dart';
 import 'package:portfolio/theme/tokens/spacing_tokens.dart';
 import 'package:portfolio/theme/tokens/typography_tokens.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 abstract class AppThemeConfig {
   ThemeData get theme;
@@ -17,4 +18,6 @@ abstract class AppThemeConfig {
   RadiusTokens get radius;
 
   MotionTokens get motion;
+
+  VisualTokens get visuals;
 }

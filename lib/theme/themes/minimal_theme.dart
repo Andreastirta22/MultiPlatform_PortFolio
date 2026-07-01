@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 import '../app_theme_config.dart';
 import '../tokens/color_tokens.dart';
@@ -17,6 +18,21 @@ class MinimalTheme implements AppThemeConfig {
     textPrimary: Color(0xFF111111),
     textSecondary: Color(0xFF8B8B8B),
     transparent: Colors.transparent,
+  );
+
+  @override
+  VisualTokens get visuals => const VisualTokens(
+    glass: false,
+
+    outlined: false,
+
+    blur: 0,
+
+    elevation: 0,
+
+    navbarRadius: 16,
+
+    cardRadius: 16,
   );
 
   @override

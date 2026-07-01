@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 import '../app_theme_config.dart';
 import '../tokens/color_tokens.dart';
@@ -20,15 +21,30 @@ class EditorialTheme implements AppThemeConfig {
   );
 
   @override
+  VisualTokens get visuals => const VisualTokens(
+    glass: false,
+
+    outlined: true,
+
+    blur: 0,
+
+    elevation: 0,
+
+    navbarRadius: 8,
+
+    cardRadius: 8,
+  );
+
+  @override
   SpacingTokens get spacing =>
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 40, xxl: 64);
 
   @override
   RadiusTokens get radius => const RadiusTokens(
-    small: 0,
-    medium: 0,
-    large: 0,
-    extraLarge: 0,
+    small: 4,
+    medium: 8,
+    large: 12,
+    extraLarge: 16,
     full: 999,
   );
 

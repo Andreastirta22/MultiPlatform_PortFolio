@@ -32,7 +32,7 @@ class MobileHeroCover extends StatelessWidget {
                     bottom: Radius.circular(28 * progress),
                   ),
                   child: Image.asset(
-                    "assets/images/andre.webp",
+                    "assets/images/second_logo.png",
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -2,34 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/theme/app_theme.dart';
 import 'package:portfolio/theme/app_theme_config.dart';
 import 'package:portfolio/theme/theme_mode.dart';
+import 'package:portfolio/theme/theme_scope.dart';
 import 'package:portfolio/theme/tokens/color_tokens.dart';
 import 'package:portfolio/theme/tokens/motion_tokens.dart';
 import 'package:portfolio/theme/tokens/radius_tokens.dart';
 import 'package:portfolio/theme/tokens/spacing_tokens.dart';
 import 'package:portfolio/theme/tokens/typography_tokens.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 extension ThemeExtension on BuildContext {
-  AppThemeConfig get appTheme {
-    return AppTheme.resolve(PortfolioTheme.dark);
-  }
+  PortfolioTheme get themeMode => ThemeScope.controller.currentTheme;
 
-  ColorTokens get colors {
-    return appTheme.colors;
-  }
+  AppThemeConfig get appTheme => AppTheme.resolve(themeMode);
 
-  SpacingTokens get spacing {
-    return appTheme.spacing;
-  }
+  ColorTokens get colors => appTheme.colors;
 
-  RadiusTokens get radius {
-    return appTheme.radius;
-  }
+  SpacingTokens get spacing => appTheme.spacing;
 
-  TypographyTokens get typography {
-    return appTheme.typography;
-  }
+  RadiusTokens get radius => appTheme.radius;
 
-  MotionTokens get motion {
-    return appTheme.motion;
-  }
+  TypographyTokens get typography => appTheme.typography;
+
+  MotionTokens get motion => appTheme.motion;
+
+  VisualTokens get visuals => appTheme.visuals;
 }

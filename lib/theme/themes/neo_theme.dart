@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 import '../app_theme_config.dart';
 import '../tokens/color_tokens.dart';
@@ -17,6 +18,21 @@ class NeoTheme implements AppThemeConfig {
     textPrimary: Color(0xFF2B2B2B),
     textSecondary: Color(0xFF6A6A6A),
     transparent: Colors.transparent,
+  );
+
+  @override
+  VisualTokens get visuals => const VisualTokens(
+    glass: true,
+
+    outlined: false,
+
+    blur: 30,
+
+    elevation: 12,
+
+    navbarRadius: 28,
+
+    cardRadius: 24,
   );
 
   @override

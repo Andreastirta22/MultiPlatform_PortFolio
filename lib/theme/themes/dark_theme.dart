@@ -5,6 +5,7 @@ import 'package:portfolio/theme/tokens/motion_tokens.dart';
 import 'package:portfolio/theme/tokens/radius_tokens.dart';
 import 'package:portfolio/theme/tokens/spacing_tokens.dart';
 import 'package:portfolio/theme/tokens/typography_tokens.dart';
+import 'package:portfolio/theme/tokens/visual_tokens.dart';
 
 class DarkTheme implements AppThemeConfig {
   @override
@@ -16,6 +17,21 @@ class DarkTheme implements AppThemeConfig {
     textPrimary: Color(0xFFF5F5F7),
     textSecondary: Color(0xFF9A9AA1),
     transparent: Colors.transparent,
+  );
+
+  @override
+  VisualTokens get visuals => const VisualTokens(
+    glass: true,
+
+    outlined: false,
+
+    blur: 20,
+
+    elevation: 8,
+
+    navbarRadius: 999,
+
+    cardRadius: 28,
   );
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/design_system/molecules/project_card/sections/project_section.dart';
 import 'package:portfolio/design_system/organisms/hero/hero_layout.dart';
+import 'package:portfolio/features/architecture/presentation/sections/architecture_section.dart';
 
 class DesktopHome extends StatefulWidget {
   final ScrollController controller;
@@ -62,17 +63,13 @@ class _DesktopHomeState extends State<DesktopHome>
           child: SingleChildScrollView(
             controller: widget.controller,
             physics: const _InertiaScrollPhysics(),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 HeroLayout(),
-
                 ProjectSection(),
-
-                _SectionPlaceholder(label: "Architecture"),
-
+                ArchitectureSection(),
                 _SectionPlaceholder(label: "Experience"),
-
                 _SectionPlaceholder(label: "Footer"),
               ],
             ),

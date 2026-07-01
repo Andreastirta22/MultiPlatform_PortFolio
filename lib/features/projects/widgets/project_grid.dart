@@ -50,13 +50,19 @@ class _ProjectGridsState extends State<ProjectGrids> {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+
       itemCount: projects.length,
+
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        mainAxisSpacing: 24,
+
         crossAxisSpacing: 24,
-        childAspectRatio: .82,
+
+        mainAxisSpacing: 24,
+
+        childAspectRatio: .55,
       ),
+
       itemBuilder: (_, index) {
         return ProjectCard(project: projects[index]);
       },
@@ -67,12 +73,17 @@ class _ProjectGridsState extends State<ProjectGrids> {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+
       itemCount: projects.length,
+
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 24,
+
         crossAxisSpacing: 24,
-        childAspectRatio: .82,
+
+        mainAxisSpacing: 24,
+
+        childAspectRatio: .60,
       ),
 
       itemBuilder: (_, index) {
@@ -88,7 +99,7 @@ class _ProjectGridsState extends State<ProjectGrids> {
     return Column(
       children: [
         SizedBox(
-          height: 390,
+          height: 540,
           child: ListView.separated(
             controller: controller,
             padding: const EdgeInsets.only(left: 24, right: 24),
@@ -100,7 +111,7 @@ class _ProjectGridsState extends State<ProjectGrids> {
                 child: ProjectCard(project: projects[index]),
               );
             },
-            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            separatorBuilder: (context, index) => const SizedBox(width: 16),
           ),
         ),
         const SizedBox(height: 20),
