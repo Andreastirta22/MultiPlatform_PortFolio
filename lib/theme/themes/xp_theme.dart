@@ -11,16 +11,12 @@ class XPTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
     background: Color(0xFF3A6EA5),
-
     surface: Color(0xFFD6E3F3),
-
     accent: Color(0xFFFFC300),
-
     border: Color(0xFF28588C),
-
     textPrimary: Color(0xFF111111),
-
     textSecondary: Color(0xFF555555),
+    transparent: Colors.transparent,
   );
 
   @override
@@ -28,8 +24,13 @@ class XPTheme implements AppThemeConfig {
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
 
   @override
-  RadiusTokens get radius =>
-      const RadiusTokens(small: 2, medium: 4, large: 6, extraLarge: 8);
+  RadiusTokens get radius => const RadiusTokens(
+    small: 2,
+    medium: 4,
+    large: 6,
+    extraLarge: 8,
+    full: 999,
+  );
 
   @override
   TypographyTokens get typography => const TypographyTokens(

@@ -1,7 +1,11 @@
-import 'package:portfolio/theme/theme_mode.dart';
+import 'package:portfolio/theme/app_theme.dart';
 
 class ThemeState {
-  final PortfolioTheme currentTheme;
+  final AppTheme theme;
 
-  ThemeState({required this.currentTheme});
+  const ThemeState({required this.theme});
+
+  ThemeState copyWidth({AppTheme? theme}) {
+    return ThemeState(theme: theme ?? this.theme);
+  }
 }

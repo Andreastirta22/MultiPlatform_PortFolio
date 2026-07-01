@@ -11,16 +11,12 @@ class MinimalTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
     background: Color(0xFFFFFFFF),
-
     surface: Color(0xFFF8F8F8),
-
     accent: Color(0xFF000000),
-
     border: Color(0xFFE8E8E8),
-
     textPrimary: Color(0xFF111111),
-
     textSecondary: Color(0xFF8B8B8B),
+    transparent: Colors.transparent,
   );
 
   @override
@@ -28,8 +24,13 @@ class MinimalTheme implements AppThemeConfig {
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
 
   @override
-  RadiusTokens get radius =>
-      const RadiusTokens(small: 12, medium: 16, large: 24, extraLarge: 32);
+  RadiusTokens get radius => const RadiusTokens(
+    small: 12,
+    medium: 16,
+    large: 24,
+    extraLarge: 32,
+    full: 999,
+  );
 
   @override
   TypographyTokens get typography => const TypographyTokens(

@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/features/home/pages/home_page.dart';
+import 'package:portfolio/theme/app_theme.dart';
+import 'package:portfolio/theme/controller/theme_controller.dart';
 
-void main() {
-  runApp(const PortfolioApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final controller = ThemeController();
+
+  await controller.initialize();
+
+  runApp(PortfolioApp(controller: controller));
 }
 
 class PortfolioApp extends StatelessWidget {
-  const PortfolioApp({super.key});
+  final ThemeController controller;
+
+  const PortfolioApp({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Multiplatform Portfolio Dart",
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text("Portfolio"))),
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (_, _) {
+        final config = AppTheme.resolve(controller.currentTheme);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: config.theme,
+          home: const HomePage(),
+        );
+      },
     );
   }
 }

@@ -7,6 +7,7 @@ class ColorTokens {
   final Color border;
   final Color textPrimary;
   final Color textSecondary;
+  final Color transparent;
 
   const ColorTokens({
     required this.background,
@@ -15,5 +16,6 @@ class ColorTokens {
     required this.border,
     required this.textPrimary,
     required this.textSecondary,
+    required this.transparent,
   });
 }

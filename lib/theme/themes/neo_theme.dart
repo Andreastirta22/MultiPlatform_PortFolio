@@ -11,16 +11,12 @@ class NeoTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
     background: Color(0xFFE8EDF5),
-
     surface: Color(0xFFE8EDF5),
-
     accent: Color(0xFF6C63FF),
-
     border: Color(0xFFD7DCE4),
-
     textPrimary: Color(0xFF2B2B2B),
-
     textSecondary: Color(0xFF6A6A6A),
+    transparent: Colors.transparent,
   );
 
   @override
@@ -28,8 +24,13 @@ class NeoTheme implements AppThemeConfig {
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
 
   @override
-  RadiusTokens get radius =>
-      const RadiusTokens(small: 15, medium: 20, large: 28, extraLarge: 40);
+  RadiusTokens get radius => const RadiusTokens(
+    small: 15,
+    medium: 20,
+    large: 28,
+    extraLarge: 40,
+    full: 999,
+  );
 
   @override
   TypographyTokens get typography => const TypographyTokens(

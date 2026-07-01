@@ -10,16 +10,12 @@ class DarkTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
     background: Color(0xFF0E0E10),
-
     surface: Color(0xFF1A1A1E),
-
     accent: Color(0xFFFF7A18),
-
     border: Color(0xFF2C2C30),
-
     textPrimary: Color(0xFFF5F5F7),
-
     textSecondary: Color(0xFF9A9AA1),
+    transparent: Colors.transparent,
   );
 
   @override
@@ -27,8 +23,13 @@ class DarkTheme implements AppThemeConfig {
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
 
   @override
-  RadiusTokens get radius =>
-      const RadiusTokens(small: 8, medium: 12, large: 20, extraLarge: 28);
+  RadiusTokens get radius => const RadiusTokens(
+    small: 8,
+    medium: 12,
+    large: 20,
+    extraLarge: 28,
+    full: 999,
+  );
 
   @override
   TypographyTokens get typography => const TypographyTokens(
