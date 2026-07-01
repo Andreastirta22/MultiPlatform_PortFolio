@@ -6,16 +6,35 @@ class ProjectSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+
+    final isMobile = width < 768;
+    final isTablet = width < 1200;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 120),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 40
+            : 80,
+
+        vertical: isMobile ? 80 : 120,
+      ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Text("Selected Work"),
+
           const SizedBox(height: 12),
+
           Text("Project that blend\nengineering and design"),
-          const SizedBox(height: 56),
-          const ProjectGrid(),
+
+          SizedBox(height: isMobile ? 40 : 56),
+
+          const ProjectGrids(),
         ],
       ),
     );

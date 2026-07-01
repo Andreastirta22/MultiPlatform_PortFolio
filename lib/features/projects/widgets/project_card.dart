@@ -16,25 +16,41 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     final p = widget.project;
+
+    final width = MediaQuery.sizeOf(context).width;
+
+    final isMobile = width < 768;
+
     return MouseRegion(
       onEnter: (_) {
-        setState(() {
-          hovered = true;
-        });
+        if (!isMobile) {
+          setState(() {
+            hovered = true;
+          });
+        }
       },
       onExit: (_) {
-        setState(() => hovered = false);
+        if (!isMobile) {
+          setState(() {
+            hovered = false;
+          });
+        }
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.all(28),
+
+        padding: EdgeInsets.all(isMobile ? 24 : 28),
+
         decoration: BoxDecoration(
           color: const Color(0xff15131F),
-          borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+
+          borderRadius: BorderRadius.circular(isMobile ? 24 : 32),
+
+          border: Border.all(color: Colors.white.withValues(alpha: .06)),
+
           boxShadow: [
-            if (hovered)
+            if (hovered && !isMobile)
               BoxShadow(
                 color: Colors.white.withValues(alpha: .15),
                 blurRadius: 32,
@@ -42,63 +58,117 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
           ],
         ),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              p.category.toUpperCase(),
-              style: const TextStyle(
-                fontSize: 11,
-                letterSpacing: 1.4,
-                fontWeight: FontWeight.w700,
-              ),
+            /// HEADER
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  p.category.toUpperCase(),
+
+                  style: TextStyle(
+                    fontSize: isMobile ? 10 : 11,
+
+                    fontWeight: FontWeight.w700,
+
+                    letterSpacing: 1.4,
+                  ),
+                ),
+
+                Text(
+                  p.year,
+
+                  style: TextStyle(color: Colors.white.withValues(alpha: .55)),
+                ),
+              ],
             ),
-            const Spacer(),
-            Text(p.year),
-            const SizedBox(height: 20),
+
+            SizedBox(height: isMobile ? 20 : 28),
+
+            /// TITLE
             Text(
               p.title,
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              p.subtitle,
-              style: TextStyle(color: Colors.white.withValues(alpha: .6)),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              p.description,
               style: TextStyle(
-                color: Colors.white.withValues(alpha: .75),
-                height: 1.6,
+                fontSize: isMobile ? 30 : 28,
+                fontWeight: FontWeight.w700,
+                height: 1,
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 12),
+
+            /// SUBTITLE
+            Text(
+              p.subtitle,
+              style: TextStyle(
+                fontSize: isMobile ? 15 : 16,
+                color: Colors.white.withValues(alpha: .60),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// DESCRIPTION
+            Text(
+              p.description,
+              maxLines: isMobile ? 3 : null,
+              overflow: TextOverflow.fade,
+              style: TextStyle(
+                fontSize: isMobile ? 15 : 16,
+                height: 1.6,
+                color: Colors.white.withValues(alpha: .75),
+              ),
+            ),
+
+            SizedBox(height: isMobile ? 24 : 40),
+
+            /// TECH
             Wrap(
               spacing: 8,
               runSpacing: 8,
+
               children: p.techs.map((tech) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 10 : 12,
+
+                    vertical: isMobile ? 5 : 6,
                   ),
+
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(999),
                     color: Colors.white.withValues(alpha: .05),
+
+                    borderRadius: BorderRadius.circular(999),
                   ),
-                  child: Text(tech, style: const TextStyle(fontSize: 12)),
+
+                  child: Text(
+                    tech,
+
+                    style: TextStyle(fontSize: isMobile ? 11 : 12),
+                  ),
                 );
               }).toList(),
             ),
-            const SizedBox(width: 8),
+
+            const SizedBox(height: 20),
+
             Row(
               children: [
-                const Text("View Project"),
+                Text(
+                  isMobile ? "Explore" : "View Project",
+
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+
                 const SizedBox(width: 8),
+
                 AnimatedSlide(
                   offset: hovered ? Offset.zero : const Offset(-0.1, 0),
+
                   duration: const Duration(milliseconds: 200),
+
                   child: const Icon(Icons.arrow_forward, size: 16),
                 ),
               ],

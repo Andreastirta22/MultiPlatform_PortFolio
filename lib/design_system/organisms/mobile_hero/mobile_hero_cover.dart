@@ -50,9 +50,9 @@ class MobileHeroCover extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       stops: const [0.0, 0.45, 0.75, 1.0],
                       colors: [
-                        const Color(0xFF0B0A14).withOpacity(0.55),
+                        const Color(0xFF0B0A14).withValues(alpha: 0.55),
                         Colors.transparent,
-                        const Color(0xFF0B0A14).withOpacity(0.75),
+                        const Color(0xFF0B0A14).withValues(alpha: 0.75),
                         const Color(0xFF0B0A14),
                       ],
                     ),
@@ -121,10 +121,10 @@ class MobileHeroCover extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.08),
+                            color: Colors.white.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(999),
                             border: Border.all(
-                              color: Colors.white.withOpacity(0.14),
+                              color: Colors.white.withValues(alpha: 0.14),
                             ),
                           ),
                           child: const Row(
@@ -201,7 +201,7 @@ class MobileHeroCover extends StatelessWidget {
                             Text(
                               "Mobile · Flutter · Supabase",
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.65),
+                                color: Colors.white.withValues(alpha: 0.65),
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 0.2,
