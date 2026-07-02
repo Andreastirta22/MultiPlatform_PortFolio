@@ -73,15 +73,35 @@ class NeoTheme implements AppThemeConfig {
   @override
   ThemeData get theme => ThemeData(
     scaffoldBackgroundColor: colors.background,
-
     primaryColor: colors.accent,
-
     colorScheme: ColorScheme.light(
       primary: colors.accent,
-
       surface: colors.surface,
-
       outline: colors.border,
+      onSurface: colors.textPrimary,
+    ),
+    textTheme: TextTheme(
+      labelMedium: TextStyle(
+        fontSize: typography.caption,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 3,
+        color: colors.textSecondary,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: typography.body,
+        color: colors.textSecondary,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: typography.title,
+        fontWeight: FontWeight.w600,
+        color: colors.textPrimary,
+      ),
+      displaySmall: TextStyle(
+        fontSize: typography.headline,
+        fontWeight: FontWeight.w700,
+        height: 1.1,
+        color: colors.textPrimary,
+      ),
     ),
   );
 }

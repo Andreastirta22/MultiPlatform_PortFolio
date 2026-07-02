@@ -38,6 +38,7 @@ dependencies:
   loading_animation_widget: ^1.3.0
   shared_preferences: ^2.5.5
   url_launcher: ^6.3.2
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +63,8 @@ flutter:
   uses-material-design: true
   assets:
   - assets/images/
-  - assets/logos/
+  - assets/logos/ 
+  - assets/navbar/ 
 
 
   # To add assets to your application, add an assets section, like this:

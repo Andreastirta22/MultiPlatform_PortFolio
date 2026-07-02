@@ -5,32 +5,56 @@ class ArchitectureIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("ARCHITECTURE", style: TextStyle(fontSize: 14, letterSpacing: 2)),
-        SizedBox(height: 24),
+        Text(
+          "ARCHITECTURE",
+          style: TextStyle(fontSize: 12, letterSpacing: 2, color: Colors.grey),
+        ),
+
+        const SizedBox(height: 24),
+
         Text(
           "Building scalable digital experiences through modular engineering",
           style: TextStyle(
-            fontSize: 42,
+            fontSize: isMobile ? 28 : 42,
             fontWeight: FontWeight.bold,
             height: 1.1,
           ),
         ),
-        SizedBox(height: 24),
-        Text(
-          "A modern architecture that enables maintainability, scalability and developer productivity",
-          style: TextStyle(fontSize: 16, height: 1.7),
+
+        const SizedBox(height: 24),
+
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 620),
+          child: Text(
+            "A modern architecture that enables maintainability, scalability and developer productivity",
+            style: TextStyle(
+              fontSize: isMobile ? 16 : 18,
+              height: 1.7,
+              color: Colors.grey[700],
+            ),
+          ),
         ),
-        SizedBox(width: 32),
+
+        const SizedBox(height: 32),
+
         Row(
-          children: [
-            _Feature(icon: Icons.extension, title: "Modular"),
-            SizedBox(height: 32),
-            _Feature(icon: Icons.shield, title: "Secure"),
-            SizedBox(height: 32),
-            _Feature(icon: Icons.sync, title: "Realtime"),
+          children: const [
+            Expanded(
+              child: _Feature(icon: Icons.extension, title: "Modular"),
+            ),
+
+            Expanded(
+              child: _Feature(icon: Icons.shield, title: "Secure"),
+            ),
+
+            Expanded(
+              child: _Feature(icon: Icons.sync, title: "Realtime"),
+            ),
           ],
         ),
       ],
@@ -40,13 +64,22 @@ class ArchitectureIntro extends StatelessWidget {
 
 class _Feature extends StatelessWidget {
   final IconData icon;
-
   final String title;
 
   const _Feature({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [Icon(icon), SizedBox(height: 12), Text(title)]);
+    return Column(
+      children: [
+        Icon(icon, size: 28),
+        const SizedBox(height: 12),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+        ),
+      ],
+    );
   }
 }

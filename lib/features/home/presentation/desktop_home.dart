@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/design_system/molecules/project_card/sections/project_section.dart';
 import 'package:portfolio/design_system/organisms/hero/hero_layout.dart';
 import 'package:portfolio/features/architecture/presentation/sections/architecture_section.dart';
+import 'package:portfolio/features/experience/presentation/sections/experience_section.dart';
 
 class DesktopHome extends StatefulWidget {
   final ScrollController controller;
@@ -16,16 +17,17 @@ class _DesktopHomeState extends State<DesktopHome>
     with SingleTickerProviderStateMixin {
   static const _showFabThreshold = 480.0;
 
-  late final AnimationController _fabAnim = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 220),
-  );
+  late final AnimationController _fabAnim;
 
   bool _fabVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _fabAnim = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
     widget.controller.addListener(_handleScroll);
   }
 
@@ -57,26 +59,20 @@ class _DesktopHomeState extends State<DesktopHome>
     return Stack(
       children: [
         ScrollConfiguration(
-          // Inertia-style scroll: trackpad/mouse-wheel friendly,
-          // no glow overscroll indicator, smooth deceleration.
           behavior: const _SmoothScrollBehavior(),
-          child: SingleChildScrollView(
+          child: ListView(
             controller: widget.controller,
             physics: const _InertiaScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                HeroLayout(),
-                ProjectSection(),
-                ArchitectureSection(),
-                _SectionPlaceholder(label: "Experience"),
-                _SectionPlaceholder(label: "Footer"),
-              ],
-            ),
+            children: [
+              HeroLayout(),
+              ProjectSection(),
+              ArchitectureSection(),
+              ExperienceSection(),
+              _SectionPlaceholder(label: "Footer"),
+            ],
           ),
         ),
 
-        // --- Scroll-to-top button ---
         Positioned(
           right: 32,
           bottom: 32,
@@ -99,8 +95,6 @@ class _DesktopHomeState extends State<DesktopHome>
   }
 }
 
-/// Temporary placeholder so the multi-section layout is visible
-/// before each real section is implemented.
 class _SectionPlaceholder extends StatelessWidget {
   final String label;
   const _SectionPlaceholder({required this.label});

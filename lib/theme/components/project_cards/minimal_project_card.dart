@@ -114,9 +114,12 @@ class MinimalProjectCard extends StatelessWidget {
                           )
                           .toList(),
                     ),
-                    const SizedBox(height: 22),
+                    const Spacer(),
+
                     const SizedBox(width: 180, child: Divider(thickness: 1)),
-                    const SizedBox(height: 28),
+
+                    const SizedBox(height: 20),
+
                     const Row(
                       children: [
                         Text(
@@ -126,7 +129,9 @@ class MinimalProjectCard extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
+
                         Spacer(),
+
                         Icon(Icons.arrow_forward, size: 18),
                       ],
                     ),

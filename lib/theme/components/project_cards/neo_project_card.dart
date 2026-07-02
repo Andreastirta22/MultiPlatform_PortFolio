@@ -4,7 +4,6 @@ import 'package:portfolio/features/projects/models/project_model.dart';
 class NeoProjectCard extends StatelessWidget {
   final ProjectModel project;
   const NeoProjectCard({super.key, required this.project});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,9 +12,9 @@ class NeoProjectCard extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xff1A1C23), Color(0xff111318)],
+          colors: [Color(0xff171A22), Color(0xff0E1118)],
         ),
-        border: Border.all(color: Colors.white.withValues(alpha: .08)),
+        border: Border.all(color: Colors.white.withValues(alpha: .06)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: .35),
@@ -28,57 +27,66 @@ class NeoProjectCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(32),
         child: Column(
           children: [
-            /// IMAGE
+            /// HERO
             Expanded(
-              flex: 5,
+              flex: 52,
               child: Container(
-                color: const Color(0xff0F1117),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xff050711),
+                      Color(0xff090B15),
+                      Color(0xff0D1017),
+                    ],
+                  ),
+                  border: Border(bottom: BorderSide(color: Color(0x10FFFFFF))),
+                ),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 22, 24, 20),
-                      child: Image.network(
-                        project.image,
-                        fit: BoxFit.contain,
-                        alignment: Alignment.center,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withValues(alpha: .06),
-                            Colors.black.withValues(alpha: .18),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.red.withValues(alpha: .12),
+                              blurRadius: 120,
+                              spreadRadius: 16,
+                            ),
                           ],
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 58, 40, 50),
+                      child: Image.network(project.image, fit: BoxFit.contain),
+                    ),
                     Positioned(
-                      top: 20,
-                      left: 20,
+                      top: 22,
+                      left: 22,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 8,
+                          horizontal: 18,
+                          vertical: 10,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: .30),
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: .12),
-                          ),
+                          borderRadius: BorderRadius.circular(999),
+                          color: Colors.white.withValues(alpha: .03),
+                          border: Border.all(color: Colors.white12),
                         ),
                         child: Text(
                           project.category.toUpperCase(),
                           style: const TextStyle(
                             fontSize: 11,
-                            letterSpacing: 1.5,
-                            color: Colors.white70,
+                            letterSpacing: 2,
                             fontWeight: FontWeight.w600,
+                            color: Colors.white70,
                           ),
                         ),
                       ),
@@ -90,122 +98,125 @@ class NeoProjectCard extends StatelessWidget {
 
             /// CONTENT
             Expanded(
-              flex: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    /// TITLE
-                    Text(
-                      project.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w800,
-                        height: 1.1,
+              flex: 48,
+              child: LayoutBuilder(
+                builder: (_, constraints) {
+                  final compact = constraints.maxHeight < 280;
+                  return Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Color(0xff141821), Color(0xff0C1018)],
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    child: Padding(
+                      padding: EdgeInsets.all(compact ? 18 : 24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          /// TITLE
+                          Text(
+                            project.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: compact ? 24 : 32,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
 
-                    /// SUBTITLE
-                    Text(
-                      project.subtitle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.grey.shade400,
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
+                          /// SUBTITLE
+                          Text(
+                            project.subtitle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: compact ? 14 : 16,
 
-                    /// DESCRIPTION
-                    Expanded(
-                      child: Text(
-                        project.description,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.grey.shade500,
-                          fontSize: 13,
-                          height: 1.7,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+                              color: Colors.grey[400],
+                            ),
+                          ),
 
-                    /// TAGS
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: project.techs
-                          .take(4)
-                          .map(
-                            (tech) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 7,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.white.withValues(alpha: .04),
-                                border: Border.all(color: Colors.white12),
-                              ),
-                              child: Text(
-                                tech,
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.white70,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                          if (!compact) ...[
+                            const SizedBox(height: 12),
+
+                            Text(
+                              project.description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14,
+                                height: 1.7,
+                                color: Colors.grey[500],
                               ),
                             ),
-                          )
-                          .toList(),
-                    ),
-                    const SizedBox(height: 14),
-                    Divider(
-                      color: Colors.white.withValues(alpha: .08),
-                      height: 1,
-                    ),
-                    const SizedBox(height: 10),
-
-                    /// FOOTER
-                    Row(
-                      children: [
-                        const Text(
-                          "View Project",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                          ],
+                          const SizedBox(height: 16),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: project.techs
+                                .take(compact ? 2 : 3)
+                                .map(_chip)
+                                .toList(),
                           ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withValues(alpha: .06),
-                            border: Border.all(color: Colors.white12),
+                          const Spacer(),
+                          Divider(color: Colors.white.withValues(alpha: .08)),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              const Text(
+                                "View Project",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const Spacer(),
+                              Container(
+                                width: compact ? 38 : 36,
+                                height: compact ? 38 : 36,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white.withValues(alpha: .04),
+                                  border: Border.all(color: Colors.white12),
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_forward,
+                                  size: 18,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ],
                           ),
-                          child: const Icon(
-                            Icons.arrow_forward,
-                            size: 18,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _chip(String tech) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        color: Colors.white.withValues(alpha: .04),
+        border: Border.all(color: Colors.white12),
+      ),
+      child: Text(
+        tech,
+        style: const TextStyle(color: Colors.white70, fontSize: 11),
       ),
     );
   }

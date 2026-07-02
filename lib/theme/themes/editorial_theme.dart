@@ -23,22 +23,15 @@ class EditorialTheme implements AppThemeConfig {
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: false,
-
     outlined: true,
-
     blur: 0,
-
     elevation: 0,
-
     navbarRadius: 8,
-
     cardRadius: 8,
   );
-
   @override
   SpacingTokens get spacing =>
       const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 40, xxl: 64);
-
   @override
   RadiusTokens get radius => const RadiusTokens(
     small: 4,
@@ -47,26 +40,18 @@ class EditorialTheme implements AppThemeConfig {
     extraLarge: 16,
     full: 999,
   );
-
   @override
   TypographyTokens get typography => const TypographyTokens(
     display: 64,
-
     headline: 42,
-
     title: 28,
-
     body: 18,
-
     caption: 14,
   );
-
   @override
   MotionTokens get motion => const MotionTokens(
     fast: Duration(milliseconds: 200),
-
     normal: Duration(milliseconds: 350),
-
     slow: Duration(milliseconds: 600),
   );
 
@@ -80,10 +65,27 @@ class EditorialTheme implements AppThemeConfig {
 
     colorScheme: ColorScheme.light(
       primary: colors.accent,
-
       surface: colors.surface,
-
       outline: colors.border,
+      onSurface: colors.textPrimary,
+    ),
+
+    textTheme: TextTheme(
+      /// SELECTED WORK
+      labelMedium: TextStyle(
+        fontSize: typography.caption,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 6,
+        color: colors.textSecondary,
+      ),
+
+      /// Projects that blend...
+      displaySmall: TextStyle(
+        fontSize: typography.headline,
+        fontWeight: FontWeight.w300,
+        height: 1.18,
+        color: colors.textPrimary,
+      ),
     ),
   );
 }

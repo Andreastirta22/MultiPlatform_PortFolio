@@ -23,15 +23,10 @@ class XPTheme implements AppThemeConfig {
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: false,
-
     outlined: true,
-
     blur: 0,
-
     elevation: 3,
-
     navbarRadius: 4,
-
     cardRadius: 4,
   );
 
@@ -51,37 +46,53 @@ class XPTheme implements AppThemeConfig {
   @override
   TypographyTokens get typography => const TypographyTokens(
     display: 52,
-
     headline: 34,
-
     title: 22,
-
     body: 14,
-
     caption: 12,
   );
 
   @override
   MotionTokens get motion => const MotionTokens(
     fast: Duration(milliseconds: 100),
-
     normal: Duration(milliseconds: 200),
-
     slow: Duration(milliseconds: 350),
   );
 
   @override
   ThemeData get theme => ThemeData(
     scaffoldBackgroundColor: colors.background,
-
     primaryColor: colors.accent,
-
     colorScheme: ColorScheme.light(
       primary: colors.accent,
-
       surface: colors.surface,
-
       outline: colors.border,
+      onSurface: colors.textPrimary,
+    ),
+    textTheme: TextTheme(
+      labelMedium: TextStyle(
+        fontSize: typography.caption,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 1,
+        color: colors.textSecondary,
+      ),
+
+      bodyMedium: TextStyle(
+        fontSize: typography.body,
+        color: colors.textSecondary,
+      ),
+
+      headlineMedium: TextStyle(
+        fontSize: typography.title,
+        fontWeight: FontWeight.w700,
+        color: colors.textPrimary,
+      ),
+      displaySmall: TextStyle(
+        fontSize: typography.headline,
+        fontWeight: FontWeight.w800,
+        height: 1.05,
+        color: colors.textPrimary,
+      ),
     ),
   );
 }

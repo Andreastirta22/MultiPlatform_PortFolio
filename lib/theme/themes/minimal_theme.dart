@@ -23,15 +23,10 @@ class MinimalTheme implements AppThemeConfig {
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: false,
-
     outlined: false,
-
     blur: 0,
-
     elevation: 0,
-
     navbarRadius: 16,
-
     cardRadius: 16,
   );
 
@@ -51,37 +46,53 @@ class MinimalTheme implements AppThemeConfig {
   @override
   TypographyTokens get typography => const TypographyTokens(
     display: 56,
-
     headline: 36,
-
     title: 24,
-
     body: 16,
-
     caption: 14,
   );
 
   @override
   MotionTokens get motion => const MotionTokens(
     fast: Duration(milliseconds: 150),
-
     normal: Duration(milliseconds: 300),
-
     slow: Duration(milliseconds: 450),
   );
 
   @override
   ThemeData get theme => ThemeData(
     scaffoldBackgroundColor: colors.background,
-
     primaryColor: colors.accent,
-
     colorScheme: ColorScheme.light(
       primary: colors.accent,
-
       surface: colors.surface,
-
       outline: colors.border,
+      onSurface: colors.textPrimary,
+    ),
+    textTheme: TextTheme(
+      labelMedium: TextStyle(
+        fontSize: typography.caption,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 2,
+        color: colors.textSecondary,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: typography.body,
+        fontWeight: FontWeight.w400,
+        color: colors.textSecondary,
+        height: 1.6,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: typography.title,
+        fontWeight: FontWeight.w500,
+        color: colors.textPrimary,
+      ),
+      displaySmall: TextStyle(
+        fontSize: typography.headline,
+        fontWeight: FontWeight.w500,
+        height: 1.15,
+        color: colors.textPrimary,
+      ),
     ),
   );
 }

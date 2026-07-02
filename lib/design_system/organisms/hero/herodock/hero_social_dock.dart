@@ -1,13 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-/// Floating social dock for [LargeHero].
-///
-/// Matches reference.png:
-/// - centered horizontally, content-hugging width (NOT full width)
-/// - matte white, pill shaped, soft shadow
-/// - height 58 (tablet) / 60 (desktop)
-/// - radius 30 (tablet) / 32 (desktop)
-/// - items use intrinsic width + fixed gaps (NOT spaceEvenly)
 class HeroSocialDock extends StatelessWidget {
   final bool isDesktop;
 
@@ -25,36 +19,52 @@ class HeroSocialDock extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: maxWidth),
         child: IntrinsicWidth(
-          child: Container(
-            height: height,
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAFAFA),
-              borderRadius: BorderRadius.circular(radius),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 32,
-                  spreadRadius: -4,
-                  offset: const Offset(0, 12),
-                  color: Colors.black.withValues(alpha: .18),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(radius),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+              child: Container(
+                height: height,
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(radius),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.18),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 40,
+                      spreadRadius: -10,
+                      offset: const Offset(0, 20),
+                      color: Colors.black.withValues(alpha: 0.25),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const _Item(icon: Icons.code_rounded, label: "Github"),
-                SizedBox(width: gap),
-                const _Item(
-                  icon: Icons.work_outline_rounded,
-                  label: "LinkedIn",
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const _Item(icon: Icons.code_rounded, label: "Github"),
+                    SizedBox(width: gap),
+                    const _Item(
+                      icon: Icons.work_outline_rounded,
+                      label: "LinkedIn",
+                    ),
+                    SizedBox(width: gap),
+                    const _Item(
+                      icon: Icons.description_outlined,
+                      label: "Resume",
+                    ),
+                    SizedBox(width: gap),
+                    const _Item(
+                      icon: Icons.mail_outline_rounded,
+                      label: "Email",
+                    ),
+                  ],
                 ),
-                SizedBox(width: gap),
-                const _Item(icon: Icons.description_outlined, label: "Resume"),
-                SizedBox(width: gap),
-                const _Item(icon: Icons.mail_outline_rounded, label: "Email"),
-              ],
+              ),
             ),
           ),
         ),
@@ -74,14 +84,14 @@ class _Item extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 15, color: Colors.black87),
+        Icon(icon, size: 15, color: Colors.white12),
         const SizedBox(width: 7),
         Text(
           label,
           style: const TextStyle(
             fontSize: 13.5,
             fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            color: Colors.white24,
             letterSpacing: -.1,
           ),
         ),

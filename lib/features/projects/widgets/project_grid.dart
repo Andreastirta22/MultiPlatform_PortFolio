@@ -99,7 +99,7 @@ class _ProjectGridsState extends State<ProjectGrids> {
     return Column(
       children: [
         SizedBox(
-          height: 540,
+          height: 720,
           child: ListView.separated(
             controller: controller,
             padding: const EdgeInsets.only(left: 24, right: 24),

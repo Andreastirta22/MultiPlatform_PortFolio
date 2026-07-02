@@ -22,15 +22,10 @@ class DarkTheme implements AppThemeConfig {
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: true,
-
     outlined: false,
-
     blur: 20,
-
     elevation: 8,
-
     navbarRadius: 999,
-
     cardRadius: 28,
   );
 
@@ -74,6 +69,34 @@ class DarkTheme implements AppThemeConfig {
       primary: colors.accent,
       surface: colors.surface,
       outline: colors.border,
+      onSurface: colors.textPrimary,
+    ),
+    textTheme: TextTheme(
+      /// SELECTED WORK
+      labelMedium: TextStyle(
+        fontSize: typography.caption,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 3,
+        color: colors.textSecondary,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: typography.body,
+        color: colors.textSecondary,
+        height: 1.6,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: typography.title,
+        fontWeight: FontWeight.w600,
+        color: colors.textPrimary,
+      ),
+
+      /// Projects that blend...
+      displaySmall: TextStyle(
+        fontSize: typography.headline,
+        fontWeight: FontWeight.w500,
+        height: 1.12,
+        color: colors.textPrimary,
+      ),
     ),
   );
 }

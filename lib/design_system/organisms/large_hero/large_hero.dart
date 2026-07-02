@@ -169,7 +169,7 @@ Widget _dock(bool isDesktop) {
   return Positioned(
     left: 0,
     right: 0,
-    bottom: isDesktop ? 24 : 16,
+    bottom: 0,
     child: HeroSocialDock(isDesktop: isDesktop),
   );
 }

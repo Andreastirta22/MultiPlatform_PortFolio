@@ -27,14 +27,7 @@ class ProjectSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// LABEL
-          Text(
-            "SELECTED WORK",
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              letterSpacing: 3,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-
+          Text("SELECTED WORK", style: Theme.of(context).textTheme.labelMedium),
           const SizedBox(height: 20),
 
           /// TITLE
@@ -42,10 +35,7 @@ class ProjectSection extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 700),
             child: Text(
               "Projects that blend engineering, storytelling, and timeless design.",
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                height: 1.12,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ),
 
