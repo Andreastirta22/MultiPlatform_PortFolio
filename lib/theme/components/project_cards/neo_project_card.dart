@@ -1,222 +1,244 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/projects/models/project_model.dart';
 
-class NeoProjectCard extends StatelessWidget {
+class NeoProjectCard extends StatefulWidget {
   final ProjectModel project;
+
   const NeoProjectCard({super.key, required this.project});
+
+  @override
+  State<NeoProjectCard> createState() => _NeoProjectCardState();
+}
+
+class _NeoProjectCardState extends State<NeoProjectCard> {
+  bool hovered = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xff171A22), Color(0xff0E1118)],
+    final p = widget.project;
+    final isMobile = MediaQuery.sizeOf(context).width < 768;
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => hovered = true),
+      onExit: (_) => setState(() => hovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOutCubic,
+        margin: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: const Color(0xff0F0F14),
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(color: Colors.white.withValues(alpha: .06)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: .4),
+              blurRadius: 30,
+              offset: const Offset(0, 16),
+            ),
+            if (hovered && !isMobile)
+              BoxShadow(
+                color: const Color(0xff6C63FF).withValues(alpha: .18),
+                blurRadius: 40,
+                spreadRadius: 2,
+              ),
+          ],
         ),
-        border: Border.all(color: Colors.white.withValues(alpha: .06)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: .35),
-            blurRadius: 40,
-            offset: const Offset(0, 16),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(32),
-        child: Column(
-          children: [
-            /// HERO
-            Expanded(
-              flex: 52,
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xff050711),
-                      Color(0xff090B15),
-                      Color(0xff0D1017),
-                    ],
-                  ),
-                  border: Border(bottom: BorderSide(color: Color(0x10FFFFFF))),
-                ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Column(
+            children: [
+              // ================= IMAGE (50%) =================
+              Expanded(
+                flex: 5,
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.red.withValues(alpha: .12),
-                              blurRadius: 120,
-                              spreadRadius: 16,
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: AnimatedScale(
+                        duration: const Duration(milliseconds: 250),
+                        scale: hovered ? 1.05 : 1,
+                        child: Image.network(p.image, fit: BoxFit.contain),
+                      ),
+                    ),
+
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withValues(alpha: .25),
                           ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 58, 40, 50),
-                      child: Image.network(project.image, fit: BoxFit.contain),
-                    ),
+
                     Positioned(
-                      top: 22,
-                      left: 22,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 18,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(999),
-                          color: Colors.white.withValues(alpha: .03),
-                          border: Border.all(color: Colors.white12),
-                        ),
-                        child: Text(
-                          project.category.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 11,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white70,
-                          ),
+                      top: 14,
+                      left: 14,
+                      child: _NeoPill(text: p.category.toUpperCase()),
+                    ),
+
+                    Positioned(
+                      top: 14,
+                      right: 14,
+                      child: Text(
+                        p.year,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: .55),
+                          fontSize: 12,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
 
-            /// CONTENT
-            Expanded(
-              flex: 48,
-              child: LayoutBuilder(
-                builder: (_, constraints) {
-                  final compact = constraints.maxHeight < 280;
-                  return Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xff141821), Color(0xff0C1018)],
+              // ================= CONTENT (50%) =================
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        p.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                          height: 1.1,
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(compact ? 18 : 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          /// TITLE
-                          Text(
-                            project.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: compact ? 24 : 32,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
+
+                      const SizedBox(height: 6),
+
+                      Text(
+                        p.subtitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: .65),
+                          fontSize: 14,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      Text(
+                        p.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: .75),
+                          height: 1.5,
+                          fontSize: 13,
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        children: p.techs.take(3).map((t) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
                             ),
-                          ),
-                          const SizedBox(height: 8),
-
-                          /// SUBTITLE
-                          Text(
-                            project.subtitle,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: compact ? 14 : 16,
-
-                              color: Colors.grey[400],
-                            ),
-                          ),
-
-                          if (!compact) ...[
-                            const SizedBox(height: 12),
-
-                            Text(
-                              project.description,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14,
-                                height: 1.7,
-                                color: Colors.grey[500],
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: .04),
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: .08),
                               ),
+                            ),
+                            child: Text(
+                              t,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+
+                      const Spacer(),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: hovered
+                              ? const Color(0xff6C63FF).withValues(alpha: .15)
+                              : Colors.white.withValues(alpha: .04),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: .08),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "View Project",
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: .85),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward,
+                              size: 16,
+                              color: Colors.white70,
                             ),
                           ],
-                          const SizedBox(height: 16),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: project.techs
-                                .take(compact ? 2 : 3)
-                                .map(_chip)
-                                .toList(),
-                          ),
-                          const Spacer(),
-                          Divider(color: Colors.white.withValues(alpha: .08)),
-                          const SizedBox(height: 12),
-                          Row(
-                            children: [
-                              const Text(
-                                "View Project",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Container(
-                                width: compact ? 38 : 36,
-                                height: compact ? 38 : 36,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white.withValues(alpha: .04),
-                                  border: Border.all(color: Colors.white12),
-                                ),
-                                child: const Icon(
-                                  Icons.arrow_forward,
-                                  size: 18,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
+}
 
-  Widget _chip(String tech) {
+// ================= PILLS =================
+class _NeoPill extends StatelessWidget {
+  final String text;
+
+  const _NeoPill({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(999),
         color: Colors.white.withValues(alpha: .04),
-        border: Border.all(color: Colors.white12),
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: Colors.white.withValues(alpha: .10)),
       ),
       child: Text(
-        tech,
-        style: const TextStyle(color: Colors.white70, fontSize: 11),
+        text,
+        style: const TextStyle(
+          fontSize: 10,
+          letterSpacing: 1.2,
+          color: Colors.white70,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

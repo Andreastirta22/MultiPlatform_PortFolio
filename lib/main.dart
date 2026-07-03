@@ -4,35 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/features/home/pages/home_page.dart';
 import 'package:portfolio/theme/app_theme.dart';
 import 'package:portfolio/theme/controller/theme_controller.dart';
-import 'package:portfolio/theme/theme_scope.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   final controller = ThemeController();
   await controller.initialize();
-  ThemeScope.controller = controller;
 
-  runApp(PortfolioApp(controller: controller));
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => controller,
+      child: const PortfolioApp(),
+    ),
+  );
 }
 
 class PortfolioApp extends StatelessWidget {
-  final ThemeController controller;
-
-  const PortfolioApp({super.key, required this.controller});
+  const PortfolioApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (_, _) {
-        final config = AppTheme.resolve(controller.currentTheme);
-        return MaterialApp(
-          scrollBehavior: MyBehavior(),
-          debugShowCheckedModeBanner: false,
-          theme: config.theme,
-          home: const HomePage(),
-        );
-      },
+    final controller = context.watch<ThemeController>();
+    final config = AppTheme.resolve(controller.currentTheme);
+
+    return MaterialApp(
+      theme: config.theme,
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
     );
   }
 }

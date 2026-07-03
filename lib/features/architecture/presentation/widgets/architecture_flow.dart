@@ -45,6 +45,13 @@ class ArchitectureFlowItem extends StatefulWidget {
 
 class _ArchitectureFlowItemState extends State<ArchitectureFlowItem> {
   double progress = 0;
+  bool _isDisposed = false;
+
+  @override
+  void dispose() {
+    _isDisposed = true;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +59,8 @@ class _ArchitectureFlowItemState extends State<ArchitectureFlowItem> {
       key: Key(widget.node.title),
 
       onVisibilityChanged: (info) {
+        if (!mounted || _isDisposed) return;
+
         final p = info.visibleFraction.clamp(0.0, 1.0);
 
         if ((p - progress).abs() > 0.02) {

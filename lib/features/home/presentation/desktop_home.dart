@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/design_system/molecules/project_card/sections/project_section.dart';
-import 'package:portfolio/design_system/organisms/hero/hero_layout.dart';
 import 'package:portfolio/features/architecture/presentation/sections/architecture_section.dart';
-import 'package:portfolio/features/experience/presentation/sections/experience_section.dart';
+import 'package:portfolio/features/experience_banner/section/experience_banner_section.dart';
+import 'package:portfolio/features/hero/hero_layout.dart';
+import 'package:portfolio/features/projects/sections/project_section.dart';
+import 'package:portfolio/theme/controller/theme_controller.dart';
+import 'package:provider/provider.dart';
 
 class DesktopHome extends StatefulWidget {
   final ScrollController controller;
@@ -56,6 +58,8 @@ class _DesktopHomeState extends State<DesktopHome>
 
   @override
   Widget build(BuildContext context) {
+    final themeController = context.watch<ThemeController>();
+
     return Stack(
       children: [
         ScrollConfiguration(
@@ -67,7 +71,7 @@ class _DesktopHomeState extends State<DesktopHome>
               HeroLayout(),
               ProjectSection(),
               ArchitectureSection(),
-              ExperienceSection(),
+              ExperienceBannerSection(themeController: themeController),
               _SectionPlaceholder(label: "Footer"),
             ],
           ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:portfolio/core/extension/responsive_extension.dart';
-import 'package:portfolio/design_system/molecules/navbar/floating_navbar.dart';
 import 'package:portfolio/features/home/presentation/desktop_home.dart';
 import 'package:portfolio/features/home/presentation/mobile_home.dart';
+import 'package:portfolio/features/navbar/floating_navbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

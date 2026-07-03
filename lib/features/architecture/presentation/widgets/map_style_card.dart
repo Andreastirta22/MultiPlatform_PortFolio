@@ -17,10 +17,7 @@ class MapFoldCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(24),
       child: Stack(
         children: [
-          // 🔥 BASE LAYER (full static map)
           child,
-
-          // 🔥 TOP FOLD (ONLY VISUAL LAYER, NO DUPLICATE CONTENT OVERLAY)
           Align(
             alignment: Alignment.topCenter,
             child: ClipRect(
@@ -33,7 +30,6 @@ class MapFoldCard extends StatelessWidget {
                     ..setEntry(3, 2, 0.001)
                     ..rotateX(-angle),
                   child: Container(
-                    // ⭐ KEY FIX: jangan pakai child langsung
                     decoration: BoxDecoration(
                       color: Theme.of(context).scaffoldBackgroundColor,
                     ),
@@ -44,7 +40,6 @@ class MapFoldCard extends StatelessWidget {
             ),
           ),
 
-          // 🔥 FOLD SHADOW (depth cue)
           Positioned.fill(
             child: IgnorePointer(
               child: Container(
