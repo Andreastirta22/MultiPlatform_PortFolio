@@ -109,7 +109,7 @@ class XPExperienceBanner extends StatelessWidget {
                   data.image,
                   fit: BoxFit.cover,
                   filterQuality: FilterQuality.high,
-                  errorBuilder: (_, __, ___) =>
+                  errorBuilder: (context, error, stackTrace) =>
                       const ColoredBox(color: Colors.black),
                 ),
 

@@ -49,7 +49,8 @@ class MinimalExperienceBanner extends StatelessWidget {
             Image.network(
               data.image,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(color: Colors.black12),
+              errorBuilder: (context, error, stackTrace) =>
+                  Container(color: Colors.black12),
             ),
 
             // =========================

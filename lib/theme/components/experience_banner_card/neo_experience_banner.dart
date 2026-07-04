@@ -68,7 +68,7 @@ class _NeoExperienceBannerState extends State<NeoExperienceBanner> {
                   child: Image.network(
                     d.image,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
+                    errorBuilder: (context, error, stackTrace) => Container(
                       color: const Color(0xff070A12),
                       child: const Icon(
                         Icons.broken_image,
