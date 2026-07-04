@@ -10,52 +10,58 @@ import 'package:portfolio/theme/tokens/visual_tokens.dart';
 class DarkTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
-    background: Color(0xFF0E0E10),
-    surface: Color(0xFF1A1A1E),
-    accent: Color(0xFFFF7A18),
-    border: Color(0xFF2C2C30),
-    textPrimary: Color(0xFFF5F5F7),
-    textSecondary: Color(0xFF9A9AA1),
+    background: Color(0xFF0B0C0F),
+    surface: Color(0xFF14161A),
+    accent: Color(0xFF00E5FF),
+    border: Color(0xFF23262B),
+    textPrimary: Color(0xFFF2F4F8),
+    textSecondary: Color(0xFF8A8F98),
     transparent: Colors.transparent,
   );
 
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: true,
-    outlined: false,
-    blur: 20,
-    elevation: 8,
+    outlined: true,
+    blur: 12,
+    elevation: 2,
     navbarRadius: 999,
-    cardRadius: 28,
+    cardRadius: 16,
   );
 
   @override
-  SpacingTokens get spacing =>
-      const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
+  SpacingTokens get spacing => const SpacingTokens(
+    xs: 4,
+    sm: 8,
+    md: 14, // tweak kecil biar density lebih “tight”
+    lg: 20,
+    xl: 28,
+    xxl: 40,
+  );
 
   @override
   RadiusTokens get radius => const RadiusTokens(
-    small: 8,
-    medium: 12,
-    large: 20,
-    extraLarge: 28,
+    small: 6,
+    medium: 10,
+    large: 14,
+    extraLarge: 16, // jauh lebih controlled
     full: 999,
   );
 
   @override
   TypographyTokens get typography => const TypographyTokens(
-    display: 56,
-    headline: 36,
-    title: 24,
-    body: 16,
-    caption: 14,
+    display: 54,
+    headline: 34,
+    title: 22,
+    body: 15, // lebih compact feel
+    caption: 13,
   );
 
   @override
   MotionTokens get motion => const MotionTokens(
-    fast: Duration(milliseconds: 150),
-    normal: Duration(milliseconds: 300),
-    slow: Duration(milliseconds: 500),
+    fast: Duration(milliseconds: 120), // lebih snappy
+    normal: Duration(milliseconds: 180),
+    slow: Duration(milliseconds: 260),
   );
 
   @override
@@ -65,36 +71,40 @@ class DarkTheme implements AppThemeConfig {
     primaryColor: colors.accent,
     cardColor: colors.surface,
     dividerColor: colors.border,
+
     colorScheme: ColorScheme.dark(
       primary: colors.accent,
       surface: colors.surface,
       outline: colors.border,
       onSurface: colors.textPrimary,
     ),
+
     textTheme: TextTheme(
-      /// SELECTED WORK
       labelMedium: TextStyle(
         fontSize: typography.caption,
         fontWeight: FontWeight.w600,
-        letterSpacing: 3,
+        letterSpacing: 2.5,
         color: colors.textSecondary,
       ),
+
       bodyMedium: TextStyle(
         fontSize: typography.body,
         color: colors.textSecondary,
-        height: 1.6,
+        height: 1.5,
       ),
+
       headlineMedium: TextStyle(
         fontSize: typography.title,
         fontWeight: FontWeight.w600,
+        letterSpacing: -0.5,
         color: colors.textPrimary,
       ),
 
-      /// Projects that blend...
       displaySmall: TextStyle(
         fontSize: typography.headline,
         fontWeight: FontWeight.w500,
-        height: 1.12,
+        height: 1.1,
+        letterSpacing: -1,
         color: colors.textPrimary,
       ),
     ),

@@ -15,11 +15,11 @@ class HeroHeadline extends StatelessWidget {
       children: [
         Text(
           title,
-          maxLines: 2,
-          softWrap: true,
           style: TextStyle(
-            fontSize: context.haroDisplay,
-            fontWeight: FontWeight.bold,
+            fontSize: context.haroDisplay * 1.1,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -1.2,
+            height: 1.05,
           ),
         ),
         SizedBox(height: context.spacing.sm),

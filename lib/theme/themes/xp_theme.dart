@@ -11,12 +11,12 @@ import '../tokens/typography_tokens.dart';
 class XPTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
-    background: Color(0xFF3A6EA5),
-    surface: Color(0xFFD6E3F3),
-    accent: Color(0xFFFFC300),
-    border: Color(0xFF28588C),
-    textPrimary: Color(0xFF111111),
-    textSecondary: Color(0xFF555555),
+    background: Color(0xFF2B579A),
+    surface: Color(0xFFEAF1FB),
+    accent: Color(0xFFFFC83D),
+    border: Color(0xFF1E3A6D),
+    textPrimary: Color(0xFF0B0B0B),
+    textSecondary: Color(0xFF2F2F2F),
     transparent: Colors.transparent,
   );
 
@@ -25,38 +25,33 @@ class XPTheme implements AppThemeConfig {
     glass: false,
     outlined: true,
     blur: 0,
-    elevation: 3,
-    navbarRadius: 4,
-    cardRadius: 4,
+    elevation: 6,
+    navbarRadius: 2,
+    cardRadius: 2,
   );
 
   @override
   SpacingTokens get spacing =>
-      const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
+      const SpacingTokens(xs: 4, sm: 6, md: 12, lg: 16, xl: 24, xxl: 32);
 
   @override
-  RadiusTokens get radius => const RadiusTokens(
-    small: 2,
-    medium: 4,
-    large: 6,
-    extraLarge: 8,
-    full: 999,
-  );
+  RadiusTokens get radius =>
+      const RadiusTokens(small: 2, medium: 3, large: 4, extraLarge: 6, full: 0);
 
   @override
   TypographyTokens get typography => const TypographyTokens(
-    display: 52,
-    headline: 34,
-    title: 22,
+    display: 48,
+    headline: 30,
+    title: 20,
     body: 14,
     caption: 12,
   );
 
   @override
   MotionTokens get motion => const MotionTokens(
-    fast: Duration(milliseconds: 100),
-    normal: Duration(milliseconds: 200),
-    slow: Duration(milliseconds: 350),
+    fast: Duration(milliseconds: 80),
+    normal: Duration(milliseconds: 140),
+    slow: Duration(milliseconds: 220),
   );
 
   @override
@@ -72,24 +67,23 @@ class XPTheme implements AppThemeConfig {
     textTheme: TextTheme(
       labelMedium: TextStyle(
         fontSize: typography.caption,
-        fontWeight: FontWeight.w800,
-        letterSpacing: 1,
+        fontWeight: FontWeight.w900,
+        letterSpacing: 0.5,
         color: colors.textSecondary,
       ),
-
       bodyMedium: TextStyle(
         fontSize: typography.body,
+        height: 1.4,
         color: colors.textSecondary,
       ),
-
       headlineMedium: TextStyle(
         fontSize: typography.title,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
         color: colors.textPrimary,
       ),
       displaySmall: TextStyle(
         fontSize: typography.headline,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w900,
         height: 1.05,
         color: colors.textPrimary,
       ),

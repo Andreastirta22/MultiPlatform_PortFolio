@@ -16,7 +16,7 @@ class ExperienceBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: ValueKey(theme), // 🔥 INI YANG FIX REBUILD ISSUE
+      key: ValueKey(theme),
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: ExperienceBannerFactoryCard.build(
         context: context,

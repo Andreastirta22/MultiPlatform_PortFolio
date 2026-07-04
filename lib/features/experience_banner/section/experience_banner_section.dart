@@ -3,6 +3,7 @@ import 'package:portfolio/features/experience_banner/controller/experience_banne
 import 'package:portfolio/features/experience_banner/data/experience_banner_data.dart';
 import 'package:portfolio/features/experience_banner/widgets/experience_banner_card.dart';
 import 'package:portfolio/theme/controller/theme_controller.dart';
+import 'package:provider/provider.dart';
 
 class ExperienceBannerSection extends StatefulWidget {
   final ThemeController themeController;
@@ -40,28 +41,30 @@ class _ExperienceBannerSectionState extends State<ExperienceBannerSection> {
 
   @override
   Widget build(BuildContext context) {
+    final themeController = context.watch<ThemeController>();
+
     return AnimatedBuilder(
-      animation: Listenable.merge([
-        controller.activeIndex,
-        widget.themeController,
-      ]),
+      animation: controller.activeIndex,
       builder: (context, _) {
         final items = experienceBannerDummy;
-        final theme = widget.themeController.currentTheme;
+        final theme = themeController.currentTheme;
 
         return SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.85,
           child: PageView.builder(
             controller: controller.pageController,
-            padEnds: true,
             physics: const BouncingScrollPhysics(),
             onPageChanged: (page) {
-              if (_isDisposed) return;
               controller.onPageChangedLocal(page, items.length);
             },
             itemBuilder: (context, index) {
               final item = items[index % items.length];
-              return ExperienceBannerCard(data: item, theme: theme);
+
+              return ExperienceBannerCard(
+                key: ValueKey('${theme.name}_${item.id}'),
+                data: item,
+                theme: theme,
+              );
             },
           ),
         );

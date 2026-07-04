@@ -21,14 +21,14 @@ class ThemeSwitcher extends StatefulWidget {
 }
 
 class _ThemeSwitcherState extends State<ThemeSwitcher> {
-  ThemeController get controller => context.read<ThemeController>();
+  late ThemeController controller;
   bool _showThemeInfo = false;
   Timer? _timer;
 
   @override
-  void initState() {
-    super.initState();
-    controller.addListener(_refresh);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    controller = context.watch<ThemeController>();
   }
 
   @override
@@ -46,6 +46,7 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.watch<ThemeController>();
     final colors = context.colors;
     final radius = context.radius;
 

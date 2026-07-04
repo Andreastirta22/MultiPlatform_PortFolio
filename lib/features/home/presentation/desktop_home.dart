@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/features/architecture/presentation/sections/architecture_section.dart';
+import 'package:portfolio/features/architecture/pages/architecture_section.dart';
 import 'package:portfolio/features/experience_banner/section/experience_banner_section.dart';
-import 'package:portfolio/features/hero/hero_layout.dart';
+import 'package:portfolio/features/hero/content/hero_layout.dart';
+import 'package:portfolio/features/introduction/presentation/pages/introduction_section.dart';
 import 'package:portfolio/features/projects/sections/project_section.dart';
 import 'package:portfolio/theme/controller/theme_controller.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +70,7 @@ class _DesktopHomeState extends State<DesktopHome>
             physics: const _InertiaScrollPhysics(),
             children: [
               HeroLayout(),
+              IntroductionSection(),
               ProjectSection(),
               ArchitectureSection(),
               ExperienceBannerSection(themeController: themeController),

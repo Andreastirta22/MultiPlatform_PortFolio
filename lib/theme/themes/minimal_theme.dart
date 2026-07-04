@@ -12,51 +12,46 @@ class MinimalTheme implements AppThemeConfig {
   @override
   ColorTokens get colors => const ColorTokens(
     background: Color(0xFFFFFFFF),
-    surface: Color(0xFFF8F8F8),
+    surface: Color(0xFFF6F6F6),
     accent: Color(0xFF000000),
-    border: Color(0xFFE8E8E8),
-    textPrimary: Color(0xFF111111),
-    textSecondary: Color(0xFF8B8B8B),
+    border: Color(0xFFEDEDED),
+    textPrimary: Color(0xFF0F0F0F),
+    textSecondary: Color(0xFF7A7A7A),
     transparent: Colors.transparent,
   );
 
   @override
   VisualTokens get visuals => const VisualTokens(
     glass: false,
-    outlined: false,
+    outlined: true,
     blur: 0,
     elevation: 0,
-    navbarRadius: 16,
-    cardRadius: 16,
+    navbarRadius: 0,
+    cardRadius: 0,
   );
 
   @override
   SpacingTokens get spacing =>
-      const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48);
+      const SpacingTokens(xs: 4, sm: 8, md: 16, lg: 24, xl: 40, xxl: 64);
 
   @override
-  RadiusTokens get radius => const RadiusTokens(
-    small: 12,
-    medium: 16,
-    large: 24,
-    extraLarge: 32,
-    full: 999,
-  );
+  RadiusTokens get radius =>
+      const RadiusTokens(small: 0, medium: 0, large: 0, extraLarge: 0, full: 0);
 
   @override
   TypographyTokens get typography => const TypographyTokens(
-    display: 56,
-    headline: 36,
-    title: 24,
-    body: 16,
-    caption: 14,
+    display: 54,
+    headline: 34,
+    title: 22,
+    body: 15,
+    caption: 12,
   );
 
   @override
   MotionTokens get motion => const MotionTokens(
-    fast: Duration(milliseconds: 150),
-    normal: Duration(milliseconds: 300),
-    slow: Duration(milliseconds: 450),
+    fast: Duration(milliseconds: 100),
+    normal: Duration(milliseconds: 180),
+    slow: Duration(milliseconds: 260),
   );
 
   @override
@@ -72,25 +67,27 @@ class MinimalTheme implements AppThemeConfig {
     textTheme: TextTheme(
       labelMedium: TextStyle(
         fontSize: typography.caption,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 2,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 3,
         color: colors.textSecondary,
       ),
       bodyMedium: TextStyle(
         fontSize: typography.body,
         fontWeight: FontWeight.w400,
+        height: 1.7,
         color: colors.textSecondary,
-        height: 1.6,
       ),
       headlineMedium: TextStyle(
         fontSize: typography.title,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
+        height: 1.2,
         color: colors.textPrimary,
       ),
       displaySmall: TextStyle(
         fontSize: typography.headline,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
         height: 1.15,
+        letterSpacing: -0.5,
         color: colors.textPrimary,
       ),
     ),

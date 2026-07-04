@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/features/hero/hero_content.dart';
+import 'package:portfolio/features/hero/content/controller/hero_content.dart';
 import 'package:portfolio/features/hero/mobile_hero/mobile_hero_cover.dart';
 
 class MobileHero extends StatelessWidget {

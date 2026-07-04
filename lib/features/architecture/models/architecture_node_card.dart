@@ -35,7 +35,7 @@ class ArchitectureNodeCard extends StatelessWidget {
 
           Expanded(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -44,6 +44,7 @@ class ArchitectureNodeCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
+                    height: 1.1,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -51,12 +52,15 @@ class ArchitectureNodeCard extends StatelessWidget {
                   node.subtitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(height: 1.1),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  node.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                const SizedBox(height: 6),
+                Expanded(
+                  child: Text(
+                    node.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
