@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/architecture/pages/architecture_section.dart';
+import 'package:portfolio/features/eng_capabilities/presentation/pages/engineering_section.dart';
 import 'package:portfolio/features/experience_banner/section/experience_banner_section.dart';
 import 'package:portfolio/features/hero/mobile_hero/mobile_hero_cover.dart';
 import 'package:portfolio/features/introduction/presentation/pages/introduction_section.dart';
@@ -20,6 +21,7 @@ class MobileHome extends StatelessWidget {
         MobileHeroCover(),
         SliverToBoxAdapter(child: IntroductionSection()),
         SliverToBoxAdapter(child: ProjectSection()),
+        SliverToBoxAdapter(child: EngineeringSection()),
         SliverToBoxAdapter(child: ArchitectureSection()),
         SliverToBoxAdapter(
           child: ExperienceBannerSection(themeController: themeController),

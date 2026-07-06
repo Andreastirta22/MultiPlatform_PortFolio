@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/architecture/pages/architecture_section.dart';
+import 'package:portfolio/features/eng_capabilities/presentation/pages/engineering_section.dart';
 import 'package:portfolio/features/experience_banner/section/experience_banner_section.dart';
 import 'package:portfolio/features/hero/content/hero_layout.dart';
 import 'package:portfolio/features/introduction/presentation/pages/introduction_section.dart';
@@ -72,6 +73,7 @@ class _DesktopHomeState extends State<DesktopHome>
               HeroLayout(),
               IntroductionSection(),
               ProjectSection(),
+              EngineeringSection(),
               ArchitectureSection(),
               ExperienceBannerSection(themeController: themeController),
               _SectionPlaceholder(label: "Footer"),
