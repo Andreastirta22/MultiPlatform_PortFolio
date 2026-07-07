@@ -44,7 +44,7 @@ class ExperienceDetailTechnology extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "${(index + 1).toString().padLeft(2, '0')}",
+                          (index + 1).toString().padLeft(2, '0'),
                           style: theme.textTheme.labelLarge?.copyWith(
                             color: theme.colorScheme.primary,
                           ),

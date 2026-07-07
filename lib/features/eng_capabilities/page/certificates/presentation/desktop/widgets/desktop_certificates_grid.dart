@@ -17,7 +17,7 @@ class DesktopCertificatesGrid extends StatelessWidget {
 
         return AnimatedBuilder(
           animation: controller,
-          builder: (_, __) {
+          builder: (context, child) {
             return Wrap(
               spacing: spacing,
               runSpacing: spacing,
