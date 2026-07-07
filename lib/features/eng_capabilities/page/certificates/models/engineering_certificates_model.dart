@@ -2,7 +2,8 @@ class CertificateModel {
   final String id;
   final String title;
   final String issuer;
-  final String category;
+  final CertificateCategory category;
+  final String description;
 
   final DateTime issuedAt;
   final String verifyUrl;
@@ -16,5 +17,18 @@ class CertificateModel {
     required this.issuedAt,
     required this.verifyUrl,
     required this.imageAsset,
+    required this.description,
   });
+}
+
+enum CertificateCategory {
+  mobile,
+  backend,
+  cloud,
+  uiux,
+  database,
+  devops,
+  cybersecurity,
+  ai,
+  softSkill,
 }

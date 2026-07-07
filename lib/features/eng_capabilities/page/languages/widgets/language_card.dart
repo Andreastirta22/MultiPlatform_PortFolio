@@ -17,57 +17,168 @@ class LanguageCard extends StatefulWidget {
   State<LanguageCard> createState() => _LanguageCardState();
 }
 
-class _LanguageCardState extends State<LanguageCard> {
+class _LanguageCardState extends State<LanguageCard>
+    with SingleTickerProviderStateMixin {
   bool _hovered = false;
   bool _pressed = false;
+
+  late AnimationController _glowController;
+
+  @override
+  void initState() {
+    super.initState();
+    _glowController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+    _glowController.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _glowController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final accent = const Color(0xFF6C63FF);
-    final isActive = widget.isSelected;
-
+    final active = widget.isSelected;
     final scale = _pressed
-        ? 0.97
-        : isActive
-        ? 1.03
+        ? .96
+        : active
+        ? 1.035
         : _hovered
-        ? 1.015
+        ? 1.02
         : 1.0;
 
-    final translateY = _hovered ? -2.0 : 0.0;
-
     return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
+      onEnter: (_) {
+        setState(() {
+          _hovered = true;
+        });
+      },
+
+      onExit: (_) {
+        setState(() {
+          _hovered = false;
+        });
+      },
+
       child: GestureDetector(
-        onTapDown: (_) => setState(() => _pressed = true),
+        onTapDown: (_) {
+          setState(() {
+            _pressed = true;
+          });
+        },
+
         onTapUp: (_) {
-          setState(() => _pressed = false);
+          setState(() {
+            _pressed = false;
+          });
           widget.onTap();
         },
-        onTapCancel: () => setState(() => _pressed = false),
 
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
+        onTapCancel: () {
+          setState(() {
+            _pressed = false;
+          });
+        },
+
+        child: AnimatedScale(
+          duration: const Duration(milliseconds: 250),
           curve: Curves.easeOutCubic,
+          scale: scale,
 
-          padding: const EdgeInsets.all(16),
+          child: AnimatedSlide(
+            duration: const Duration(milliseconds: 250),
+            offset: _hovered ? const Offset(0, -0.02) : Offset.zero,
 
-          // ✅ CLEAN TRANSFORM (NO Matrix4)
-          child: Transform.translate(
-            offset: Offset(0, translateY),
-
-            child: Transform.scale(
-              scale: scale,
-
-              child: _CardBody(
-                language: widget.language,
-                isActive: isActive,
-                accent: accent,
-              ),
+            child: AnimatedBuilder(
+              animation: _glowController,
+              builder: (context, child) {
+                return _CardBody(
+                  language: widget.language,
+                  isActive: active,
+                  accent: accent,
+                  glow: _glowController.value,
+                );
+              },
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CardBody extends StatelessWidget {
+  final LanguageModel language;
+  final bool isActive;
+  final Color accent;
+  final double glow;
+  const _CardBody({
+    required this.language,
+    required this.isActive,
+    required this.accent,
+    required this.glow,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 350),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withValues(alpha: isActive ? .08 : .035),
+            Colors.white.withValues(alpha: .015),
+          ],
+        ),
+
+        border: Border.all(
+          width: isActive ? 1.5 : 1,
+          color: isActive
+              ? accent.withValues(alpha: .65)
+              : Colors.white.withValues(alpha: .08),
+        ),
+
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: .35),
+            blurRadius: 25,
+            offset: const Offset(0, 15),
+          ),
+          if (isActive)
+            BoxShadow(
+              color: accent.withValues(alpha: .15 + glow * .12),
+              blurRadius: 35,
+              spreadRadius: 2,
+            ),
+        ],
+      ),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _Header(language: language, accent: accent, isActive: isActive),
+          const SizedBox(height: 16),
+          _Tags(tags: language.tags),
+          const SizedBox(height: 14),
+
+          Text(
+            language.level,
+            style: TextStyle(
+              fontSize: 12,
+              letterSpacing: .8,
+              color: Colors.white.withValues(alpha: .5),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -88,27 +199,25 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          padding: const EdgeInsets.all(6),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             color: isActive
-                ? accent.withValues(alpha: 0.15)
-                : Colors.white.withValues(alpha: 0.05),
+                ? accent.withValues(alpha: .18)
+                : Colors.white.withValues(alpha: .05),
           ),
-          child: Image.asset(language.iconAsset, width: 18, height: 18),
+          child: Image.asset(language.iconAsset, width: 22, height: 22),
         ),
-
-        const SizedBox(width: 10),
-
+        const SizedBox(width: 12),
         Expanded(
           child: Text(
             language.name,
             style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: Colors.white.withValues(alpha: 0.9),
-              letterSpacing: 0.2,
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: Colors.white.withValues(alpha: .95),
             ),
           ),
         ),
@@ -117,102 +226,28 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _CardBody extends StatelessWidget {
-  final LanguageModel language;
-  final bool isActive;
-  final Color accent;
-
-  const _CardBody({
-    required this.language,
-    required this.isActive,
-    required this.accent,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-
-        border: Border.all(
-          color: isActive
-              ? accent.withValues(alpha: 0.6)
-              : Colors.white.withValues(alpha: 0.06),
-          width: isActive ? 1.4 : 1,
-        ),
-
-        color: isActive
-            ? accent.withValues(alpha: 0.06)
-            : Colors.white.withValues(alpha: 0.02),
-
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.25),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-          if (isActive)
-            BoxShadow(
-              color: accent.withValues(alpha: 0.18),
-              blurRadius: 26,
-              spreadRadius: 1,
-            ),
-        ],
-      ),
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _Header(language: language, accent: accent, isActive: isActive),
-
-          const SizedBox(height: 14),
-
-          _Tags(tags: language.tags),
-
-          const SizedBox(height: 10),
-
-          AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: isActive ? 1 : 0.6,
-            child: Text(
-              language.level,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white.withValues(alpha: 0.45),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _Tags extends StatelessWidget {
   final List<String> tags;
-
   const _Tags({required this.tags});
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 6,
-      runSpacing: 6,
+      spacing: 7,
+      runSpacing: 7,
       children: tags.take(3).map((tag) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white.withValues(alpha: 0.04),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withValues(alpha: .05),
+            border: Border.all(color: Colors.white.withValues(alpha: .08)),
           ),
           child: Text(
             tag,
             style: TextStyle(
               fontSize: 11,
-              color: Colors.white.withValues(alpha: 0.6),
+              color: Colors.white.withValues(alpha: .65),
             ),
           ),
         );

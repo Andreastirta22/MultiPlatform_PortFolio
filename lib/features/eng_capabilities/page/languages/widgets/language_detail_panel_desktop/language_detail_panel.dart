@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/core/extension/theme_extension.dart';
 import 'package:provider/provider.dart';
 
-import '../controller/engineering_language_controller.dart';
+import '../../controller/engineering_language_controller.dart';
 
 class LanguageDetailPanel extends StatelessWidget {
   const LanguageDetailPanel({super.key});
@@ -21,10 +21,15 @@ class LanguageDetailPanel extends StatelessWidget {
           switchInCurve: Curves.easeOutCubic,
           switchOutCurve: Curves.easeInCubic,
 
-          child: Padding(
-            key: ValueKey(language.id),
-            padding: const EdgeInsets.all(24),
-
+          child: Container(
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+              color: context.colors.surface.withValues(alpha: .35),
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(
+                color: context.colors.textPrimary.withValues(alpha: .06),
+              ),
+            ),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,53 +71,71 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 46,
-          height: 46,
+          width: 64,
+          height: 64,
+
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: colors.textPrimary.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(18),
+            color: colors.textPrimary.withValues(alpha: .06),
           ),
-          child: Center(
-            child: Image.asset(language.iconAsset, width: 24, height: 24),
+
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Image.asset(language.iconAsset),
           ),
         ),
-        const SizedBox(width: 14),
+
+        const SizedBox(width: 18),
+
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Text(
                 language.name,
                 style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -.5,
                 ),
               ),
-              const SizedBox(height: 4),
+
+              const SizedBox(height: 6),
+
               Text(
                 language.description,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+
                 style: TextStyle(
-                  fontSize: 12,
-                  height: 1.4,
-                  color: colors.textPrimary.withValues(alpha: 0.5),
+                  fontSize: 13,
+                  height: 1.5,
+                  color: colors.textPrimary.withValues(alpha: .55),
                 ),
               ),
             ],
           ),
         ),
+
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.blueAccent.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(999),
+
+            color: const Color(0xFF6C63FF).withValues(alpha: .12),
           ),
-          child: Text(language.level, style: const TextStyle(fontSize: 11)),
+
+          child: Text(
+            language.level,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
         ),
       ],
     );
@@ -155,9 +178,23 @@ class _MetricsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _Metric("Experience", "${language.yearsExperience}y"),
-        const SizedBox(width: 24),
-        _Metric("Projects", "${language.linkedProjects.length}"),
+        Expanded(
+          child: _Metric(
+            "${language.yearsExperience} Years",
+            "${language.yearsExperience}",
+            description: "Engineering Experience",
+          ),
+        ),
+
+        const SizedBox(width: 16),
+
+        Expanded(
+          child: _Metric(
+            "Projects",
+            "${language.linkedProjects.length}",
+            description: "Applied Systems",
+          ),
+        ),
       ],
     );
   }
@@ -166,28 +203,61 @@ class _MetricsRow extends StatelessWidget {
 class _Metric extends StatelessWidget {
   final String label;
   final String value;
+  final String? description;
 
-  const _Metric(this.label, this.value);
+  const _Metric(this.label, this.value, {this.description});
 
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            color: colors.textPrimary.withValues(alpha: 0.4),
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: colors.textPrimary.withValues(alpha: 0.04),
+
+        border: Border.all(color: colors.textPrimary.withValues(alpha: 0.06)),
+      ),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.5,
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          value,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-      ],
+
+          const SizedBox(height: 6),
+
+          Text(
+            label.toUpperCase(),
+            style: TextStyle(
+              fontSize: 11,
+              letterSpacing: 1.2,
+              fontWeight: FontWeight.w600,
+              color: colors.textPrimary.withValues(alpha: 0.45),
+            ),
+          ),
+
+          if (description != null) ...[
+            const SizedBox(height: 4),
+
+            Text(
+              description!,
+              style: TextStyle(
+                fontSize: 11,
+                color: colors.textPrimary.withValues(alpha: 0.4),
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }
@@ -314,6 +384,7 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final accent = const Color(0xFF6C63FF);
 
     return Center(
@@ -344,7 +415,7 @@ class _EmptyState extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.white.withValues(alpha: 0.85),
+              color: colors.textPrimary.withValues(alpha: 0.85),
             ),
           ),
           const SizedBox(height: 6),
@@ -352,7 +423,7 @@ class _EmptyState extends StatelessWidget {
             "Click a card to explore details",
             style: TextStyle(
               fontSize: 12,
-              color: Colors.white.withValues(alpha: 0.45),
+              color: colors.textPrimary.withValues(alpha: 0.45),
             ),
           ),
         ],

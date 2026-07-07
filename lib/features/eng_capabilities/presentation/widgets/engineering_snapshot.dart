@@ -8,56 +8,37 @@ class EngineeringSnapshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final spacing = context.spacing;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesktop = context.isDesktop;
-        final isTablet = context.isTablet;
 
-        final double itemWidth;
-        if (isDesktop) {
-          itemWidth = (constraints.maxWidth - (spacing.lg * 3) / 4);
-        } else if (isTablet) {
-          itemWidth = (constraints.maxWidth - spacing.lg) / 2;
-        } else {
-          itemWidth = constraints.maxWidth;
-        }
+    final isDesktop = context.isDesktop;
+    final isTablet = context.isTablet;
 
-        return Wrap(
-          spacing: spacing.lg,
-          runSpacing: spacing.lg,
-          children: [
-            SizedBox(
-              width: itemWidth,
-              child: const EngineeringSnapshotCard(
-                title: "Languages",
-                value: "08",
-              ),
-            ),
-            SizedBox(
-              width: itemWidth,
-              child: const EngineeringSnapshotCard(
-                title: "Projects",
-                value: "05",
-              ),
-            ),
-            SizedBox(
-              width: itemWidth,
-              child: const EngineeringSnapshotCard(
-                title: "Certificates",
-                value: "14",
-              ),
-            ),
-            SizedBox(
-              width: itemWidth,
-              child: const EngineeringSnapshotCard(
-                title: "Platforms",
-                value: "06",
-              ),
-            ),
-          ],
-        );
-      },
+    return Container(
+      padding: EdgeInsets.all(spacing.xl),
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: colors.border),
+      ),
+      child: GridView.count(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: isDesktop
+            ? 4
+            : isTablet
+            ? 2
+            : 1,
+        crossAxisSpacing: spacing.lg,
+        mainAxisSpacing: spacing.lg,
+        childAspectRatio: isDesktop ? 1.8 : 1.6,
+        children: const [
+          EngineeringSnapshotCard(title: "Languages", value: "08"),
+          EngineeringSnapshotCard(title: "Projects", value: "05"),
+          EngineeringSnapshotCard(title: "Certificates", value: "14"),
+          EngineeringSnapshotCard(title: "Platforms", value: "06"),
+        ],
+      ),
     );
   }
 }

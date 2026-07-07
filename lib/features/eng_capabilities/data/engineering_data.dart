@@ -85,7 +85,7 @@ const List<EngineeringModel> engineeringData = [
     id: "php",
     name: "PHP",
     category: EngineeringCategory.language,
-    iconAsset: "assets/icons/php.svg",
+    iconAsset: "assets/icons/php.png",
     description:
         "Server-side language used for academic and CRUD-based systems.",
     level: "Intermediate",

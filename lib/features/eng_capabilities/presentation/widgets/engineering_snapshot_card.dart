@@ -7,6 +7,7 @@ class EngineeringSnapshotCard extends StatelessWidget {
     required this.title,
     required this.value,
   });
+
   final String title;
   final String value;
 
@@ -25,23 +26,27 @@ class EngineeringSnapshotCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            title.toLowerCase(),
+            title.toUpperCase(),
             style: TextStyle(
               fontSize: typography.caption,
               color: colors.textSecondary,
-              letterSpacing: 1.5,
+              letterSpacing: 1.8,
               fontWeight: FontWeight.w600,
             ),
           ),
+
           SizedBox(height: spacing.md),
+
           Text(
             value,
             style: TextStyle(
-              fontSize: typography.display,
+              fontSize: typography.headline,
               color: colors.textPrimary,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
+              height: .9,
             ),
           ),
         ],

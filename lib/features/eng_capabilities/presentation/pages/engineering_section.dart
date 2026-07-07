@@ -60,9 +60,7 @@ class _EngineeringSectionView extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 30),
-
           EngineeringContent(currentTab: controller.currentTab),
         ],
       ),

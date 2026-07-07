@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/eng_capabilities/page/languages/models/engineering_languages_models.dart';
 import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_card.dart';
-import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_detail_embedded.dart';
+import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_detail_panel_mobile/language_detail_embedded.dart';
 
 class LanguageAccordionCard extends StatelessWidget {
   final LanguageModel language;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_detail_panel.dart';
+import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_detail_panel_desktop/language_detail_panel.dart';
 import 'package:portfolio/features/eng_capabilities/page/languages/widgets/language_grid.dart';
 
 class DesktopLanguagesLayout extends StatelessWidget {

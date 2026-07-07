@@ -27,8 +27,30 @@ class LanguageDetailEmbedded extends StatelessWidget {
             style: theme.textTheme.bodyMedium?.copyWith(height: 1.6),
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
 
+          _SectionTitle("Proficiency"),
+
+          const SizedBox(height: 8),
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: language.confidence / 100),
+              duration: const Duration(milliseconds: 700),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, _) {
+                return LinearProgressIndicator(
+                  value: value,
+                  minHeight: 6,
+                  backgroundColor: theme.dividerColor.withValues(alpha: .15),
+                  valueColor: const AlwaysStoppedAnimation(Color(0xFF6C63FF)),
+                );
+              },
+            ),
+          ),
+
+          const SizedBox(height: 24),
           _SectionTitle("Platforms"),
 
           const SizedBox(height: 12),
